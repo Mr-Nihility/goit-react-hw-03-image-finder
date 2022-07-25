@@ -25,7 +25,7 @@ export class App extends Component {
           color: '#010101',
         }}
       >
-        {image && <Modal image={image} onClose={handlerCloseModal} />}
+        {image && <Modal image={image} onClose={this.handlerCloseModal} />}
       </div>
     );
   }
