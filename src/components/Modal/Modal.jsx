@@ -1,4 +1,6 @@
 import { Component } from 'react';
+import { ModalBox, Backdrop, ModalImg } from './Modal.styles';
+//--------------------------------------------------------------------------//
 
 class Modal extends Component {
   componentDidMount() {
@@ -13,18 +15,19 @@ class Modal extends Component {
       this.props.onClose();
     }
   };
+  handkerBackDrop = e => {
+    if (e.target === e.currentTarget) {
+      this.props.onClose();
+    }
+  };
 
   render() {
-    const { image, onClose } = this.props;
     return (
-      <div>
-        <button onClick={onClose}>X</button>
-
-        <div>
-          <img src={image} />
-          ``
-        </div>
-      </div>
+      <Backdrop onClick={this.handkerBackDrop}>
+        <ModalBox>
+          <ModalImg src={this.props.image} alt="def" />
+        </ModalBox>
+      </Backdrop>
     );
   }
 }

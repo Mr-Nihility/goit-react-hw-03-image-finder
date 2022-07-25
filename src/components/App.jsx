@@ -1,5 +1,8 @@
 import { Component } from 'react';
-import Modal from './components/Modal';
+import { Modal } from './Modal/Modal';
+import { Searchbar } from './Searchbar/Searchbar';
+import { ImageGallery } from './ImageGallery/ImageGallery';
+import { images } from '../data/data';
 
 export class App extends Component {
   state = {
@@ -13,18 +16,27 @@ export class App extends Component {
     this.setState({ image: '' });
   };
 
+  handlerForm = query => {
+    console.log(query);
+  };
+
   render() {
     const { image } = this.state;
     return (
       <div
         style={{
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          fontSize: 40,
-          color: '#010101',
+          display: 'grid',
+          gridTemplateColumns: '1fr0',
+          gridGap: '16px',
+          paddingBottom: '24px',
         }}
       >
+        <Searchbar onSubmit={this.handlerForm} />
+        <ImageGallery
+          imgList={images.hits}
+          handlerOpenModal={this.handlerOpenModal}
+        />
+
         {image && <Modal image={image} onClose={this.handlerCloseModal} />}
       </div>
     );
