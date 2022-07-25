@@ -1,6 +1,10 @@
 import { ButtonStyles } from './Button.styles';
 
-const Button = () => {
-  return <ButtonStyles type="button">Load more</ButtonStyles>;
+const Button = ({ onClick }) => {
+  return (
+    <ButtonStyles type="button" onClick={onClick}>
+      Load more
+    </ButtonStyles>
+  );
 };
 export { Button };

@@ -18,9 +18,14 @@ class Searchbar extends Component {
   };
 
   handlerSubmit = e => {
+    const { query } = this.state;
     e.preventDefault();
 
-    this.props.onSubmit(this.state.query);
+    if (!query.trim()) {
+      alert('empty field');
+      return;
+    }
+    this.props.onSubmit(query);
     this.setState({ query: '' });
   };
 
