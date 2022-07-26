@@ -6,6 +6,7 @@ import { ModalBox, Backdrop, ModalImg } from './Modal.styles';
 class Modal extends Component {
   static propTypes = {
     image: PropTypes.string.isRequired,
+    onClose: PropTypes.func.isRequired,
   };
   componentDidMount() {
     window.addEventListener('keydown', this.onTap);

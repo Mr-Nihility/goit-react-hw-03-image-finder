@@ -17,11 +17,8 @@ async function createRequest(name, page = 1) {
       per_page: 12,
     },
   };
-  try {
-    return await axios(params);
-  } catch (error) {
-    return error;
-  }
+
+  return await axios(params);
 }
 
 export { createRequest };

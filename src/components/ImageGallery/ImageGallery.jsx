@@ -30,7 +30,7 @@ class ImageGallery extends Component {
       createRequest(this.props.query)
         .then(res => {
           const { data } = res;
-          console.log(res.data);
+
           this.setState(prevState => ({
             imageList: [...data.hits],
             page: 2,
@@ -38,20 +38,24 @@ class ImageGallery extends Component {
             status: STATUS.success,
           }));
         })
-        .catch(() => {
-          this.setState({ status: STATUS.error });
+        .catch(error => {
+          this.setState({ status: STATUS.error, error });
         });
     }
   }
   //обробник кнопки "завантажити ще"
   loadMore = () => {
-    createRequest(this.props.query, this.state.page).then(res => {
-      const { hits } = res.data;
-      this.setState(prevState => ({
-        imageList: [...prevState.imageList, ...hits],
-        page: prevState.page + 1,
-      }));
-    });
+    createRequest(this.props.query, this.state.page)
+      .then(res => {
+        const { hits } = res.data;
+        this.setState(prevState => ({
+          imageList: [...prevState.imageList, ...hits],
+          page: prevState.page + 1,
+        }));
+      })
+      .catch(error => {
+        this.setState({ status: STATUS.error, error });
+      });
   };
 
   //рендер
@@ -63,6 +67,16 @@ class ImageGallery extends Component {
     }
     if (status === STATUS.error) {
       return <p>{error}</p>;
+    }
+    if (!imageList.length) {
+      return (
+        <p
+          style={{
+            margin: '100px auto',
+            fontSize: '40px',
+          }}
+        >{`Please, enter the search request`}</p>
+      );
     }
     if (status === STATUS.success) {
       return (

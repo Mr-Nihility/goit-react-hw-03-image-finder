@@ -7,6 +7,7 @@ import {
   SearchLabel,
   SearchInput,
 } from './Searchbar.styles';
+import { toast } from 'react-toastify';
 //---------------------------------------------//
 class Searchbar extends Component {
   static propTypes = {
@@ -26,7 +27,15 @@ class Searchbar extends Component {
     e.preventDefault();
 
     if (!query.trim()) {
-      alert('empty field');
+      toast.error('empty field', {
+        position: 'top-right',
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
       return;
     }
     this.props.onSubmit(query);
