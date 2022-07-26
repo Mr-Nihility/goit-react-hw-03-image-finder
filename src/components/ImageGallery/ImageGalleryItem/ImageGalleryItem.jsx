@@ -1,4 +1,5 @@
 import { ImgGalleryLi, ImgGalleryImg } from '../ImageGallery.styles';
+import PropTypes from 'prop-types';
 
 const ImageGalleryItem = ({ smallImg, largeImg, handlerOpenModal }) => {
   return (
@@ -12,4 +13,9 @@ const ImageGalleryItem = ({ smallImg, largeImg, handlerOpenModal }) => {
   );
 };
 
+ImageGalleryItem.propTypes = {
+  smallImg: PropTypes.string.isRequired,
+  largeImg: PropTypes.string.isRequired,
+  handlerOpenModal: PropTypes.func.isRequired,
+};
 export { ImageGalleryItem };

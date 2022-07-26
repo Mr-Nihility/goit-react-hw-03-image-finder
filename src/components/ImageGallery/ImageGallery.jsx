@@ -4,6 +4,7 @@ import { Component } from 'react';
 import { ImgGallery } from './ImageGallery.styles';
 import { ImageGalleryItem } from './ImageGalleryItem/ImageGalleryItem';
 import { createRequest } from '../../api/apirequest';
+import PropTypes from 'prop-types';
 
 const STATUS = {
   idle: 'idle',
@@ -12,6 +13,11 @@ const STATUS = {
   success: 'success',
 };
 class ImageGallery extends Component {
+  static propTypes = {
+    handlerOpenModal: PropTypes.func.isRequired,
+    query: PropTypes.string.isRequired,
+  };
+
   state = {
     imageList: [],
     page: 1,
@@ -41,7 +47,6 @@ class ImageGallery extends Component {
   loadMore = () => {
     createRequest(this.props.query, this.state.page).then(res => {
       const { hits } = res.data;
-
       this.setState(prevState => ({
         imageList: [...prevState.imageList, ...hits],
         page: prevState.page + 1,

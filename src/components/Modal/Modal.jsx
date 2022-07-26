@@ -1,8 +1,12 @@
+import PropTypes from 'prop-types';
 import { Component } from 'react';
 import { ModalBox, Backdrop, ModalImg } from './Modal.styles';
 //--------------------------------------------------------------------------//
 
 class Modal extends Component {
+  static propTypes = {
+    image: PropTypes.string.isRequired,
+  };
   componentDidMount() {
     window.addEventListener('keydown', this.onTap);
   }
